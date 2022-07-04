@@ -1,0 +1,54 @@
+{% extends 'shop/base.html' %}
+{% block content %}
+<div class="container">
+    <div class="col-lg-8 col-md-8 col-xs-8 mx-auto border rounded py-3 px-3 mt-5">
+        {% for od in order %}
+        <div class="row ">
+            <div class="col-lg-4 col-md-4 col-xs-4">
+                <img src='/media/{{od.product.image}}' alt="" class="img-fluid">
+            </div>
+            <div class="col-lg-4 col-md-4 col-xs-4">
+                <h3>{{od.product.product_name}}</h3>
+                <br>
+                <p>Price:{{od.total_cost}}</p>
+                <br>
+                <p>Quantity:{{od.quantity}}</p>
+            </div>
+            <div class="col-lg-1 col-md-1 col-xs-1"></div>
+            <div class="col-lg- col-md-3 col-xs-3">
+                <p>Order status: {{od.status}}</p>
+                {% if od.status == 'Accepted' %}
+                <div class="progress">
+                    <div class="progress-bar bg-primary" role="progressbar" style="width: 25%" aria-valuenow="25"
+                         aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                 {% elif od.status == 'Packed' %}
+                <div class="progress">
+                    <div class="progress-bar bg-warning" role="progressbar" style="width: 50%" aria-valuenow="50"
+                         aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                {% elif od.status == 'On The Way' %}
+                <div class="progress">
+                    <div class="progress-bar bg-info" role="progressbar" style="width: 75%" aria-valuenow="75"
+                         aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                {% elif od.status == 'Delivered' %}
+                <div class="progress">
+                    <div class="progress-bar bg-success" role="progressbar" style="width: 100%" aria-valuenow="100"
+                         aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                 {% else %}
+                 <div class="progress">
+                    <div class="progress-bar bg-danger" role="progressbar" style="width: 100%" aria-valuenow="100"
+                         aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        <hr class="mt-4 mb-4">
+        {% endfor %}
+    </div>
+
+</div>
+
+{% endblock %}

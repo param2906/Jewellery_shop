@@ -1,0 +1,28 @@
+{% extends 'shop/base.html' %}
+{% block content %}
+{% load cart %}
+
+<div class="container">
+    <div class="row ">
+        <h1>{{categories.name}}</h1>
+        {% for i in products %}
+        <div class="card mx-auto mt-5" style="width: 19rem;">
+            <img alt="..." class="card-img-top img-fluid" style="height:23rem;" src='/media/{{i.image}}'>
+            <div class="card-body">
+                <h5 class="card-title">{{i.product_name}}</h5>
+                <p class="card-text">Price:Rs.{{i.price}}</p>
+                <p class="card-text">Purity:{{i.purity}}k</p>
+                <p class="card-text">Weight:{{i.weight}}grms</p>
+                    <form action="/shop/view " class="d-inline">
+                        <input type="hidden" name="product_id" value={{i.id}}>
+                        <input class="btn btn-primary d-grid gap-2" type="submit" value="view">
+                    </form>
+
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}
+

@@ -1,0 +1,42 @@
+{% extends 'shop/base.html' %}
+{% block content %}
+
+
+<div class="container">
+    <div class="row mt-5">
+        <div class="col-sm-6 col-md-6 col-xl-6 ">
+            <img src='/media/{{products.image}}'
+                 class="img-fluid border rounded py-0 px-0 shadow p-3 mb-5 bg-body rounded">
+        </div>
+        <div class="col-sm-2 col-md-2 col-xl-2 ">
+        </div>
+        <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4 ">
+            <h1><strong> <span>{{products.product_name}}</span> </strong></h1>
+            <hr>
+            <h3 class="mt-4"> Price: <span class="ms-3"> Rs.{{products.price}} </span></h3>
+            <h3 class="mt-4"> Purity: <span class="ms-3"> {{products.purity}}K </span></h3>
+            <h3 class="mt-4"> Gross weight: <span class="ms-3"> {{products.weight}}grms </span></h3>
+             <h3 class="mt-4">Type:{{products.jewellery_type}}</h3>
+            <h3 class="mt-5 mb-5">Review:{{products.desc}}</h3>
+            {% if item_already_in_cart %}
+
+            <a href="{% url 'show_cart' %}" class="btn btn-primary">Go to cart</a>
+            {% else %}
+              {% if request.session.customer %}
+            <form action="/shop/add-to-cart">
+                {% else %}
+            <form action="/shop/login">
+               {% endif %}
+                <input type="hidden" name="prod_id" value={{products.id}} id="prod_id">
+                <input class="btn btn-primary" type="submit" value="add to cart">
+            </form>
+            </form>
+
+            {% endif %}
+
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

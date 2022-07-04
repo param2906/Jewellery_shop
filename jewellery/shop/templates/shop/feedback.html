@@ -1,0 +1,50 @@
+{% extends 'shop/base.html' %}
+{% block content %}
+<div class="container">
+    <center><h1>Feedback</h1></center>
+    <div class="p-4 m-4">
+        <div class="col-lg-5 col-md-5 col-xs-5 mx-auto border rounded py-5 px-5 shadow p-3 mb-5 bg-body rounded">
+            <form action="{% url 'feedback' %}" method="POST">
+                {% csrf_token %}
+                <!-- First name -->
+                {% if error %}
+                <div class="alert alert-danger" role="alert">
+                    {{error}}
+                </div>
+                {% endif %}
+                <div class="mb-3">
+                    <label class="form-label">Name</label>
+                    <input type="text" name="name"
+                           class="form-control rounded-pill "
+                           placeholder="First name" aria-describedby="helpId">
+                </div>
+                <!-- Email -->
+                <div class="mb-3">
+                    <label class="form-label">Email</label>
+                    <input type="email" name="email" class="form-control rounded-pill"
+                           placeholder="Example@gmail.com" aria-describedby="helpId">
+                </div>
+                <!-- phone -->
+                <div class="mb-3">
+                    <label class="form-label">Phone</label>
+                    <input type="number" name="phone" class="form-control rounded-pill"
+                           placeholder="9999-999-999"
+                           aria-describedby="helpId">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Feedback</label>
+                    <textarea name="feedback" class="form-control rounded-pill" id="exampleFormControlTextarea1"
+                              rows="3" aria-describedby="helpId"></textarea>
+
+                </div>
+
+                <div class="form-group">
+                    <input class="btn btn-sm btn-info rounded-pill" type="Submit" value="Submit">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

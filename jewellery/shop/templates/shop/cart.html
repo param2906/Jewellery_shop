@@ -1,0 +1,56 @@
+{% extends 'shop/base.html' %}
+{% block content %}
+{% load static %}
+<center><h1>Cart</h1></center>
+<div class="container">
+    <div class="p-4 m-4">
+        <div class="row">
+            <div class="col-lg-8 col-md-8 col-xs-8 mx-auto border rounded py-5 px-5 shadow p-3 mb-5 bg-body rounded">
+                {% for cart in carts %}
+                <div class="row">
+                    <div class="col-lg-4 col-md-4 col-xs-4">
+                        <img src='/media/{{cart.product.image}}' alt="" class="img-fluid">
+                    </div>
+                    <div class="col-lg-8 col-md-8 col-xs-8">
+                        <h3>{{cart.product.product_name}}</h3>
+                        <br>
+                        <p>Price:Rs{{cart.product.price}}</p>
+                        <br>
+                        <p>{{cart.product.desc}}</p>
+                        <p>Quantity:
+                            <button type="button" pid="{{cart.product.id}}" class="btn btn-secondary btn-sm minus-cart">
+                                -
+                            </button>
+                            <span>{{cart.quantity}}</span>
+                            <button type="button" pid="{{cart.product.id}}" class="btn btn-secondary btn-sm plus-cart">+
+                            </button>
+                        </p>
+                        <button type="submit" pid="{{cart.product.id}}" class="btn btn-danger remove-cart">Remove
+                        </button>
+                    </div>
+                </div>
+                <hr class="mt-4 mb-4">
+                {% endfor %}
+            </div>
+
+            <div class="col-lg-3 col-md-3 col-xs-3 mx-auto  rounded  mb-5 bg-body rounded">
+                <h3>Totlal Item</h3>
+                <hr>
+                <p>Amount</p>
+                <p class="ms-auto">Rs. <span id="amount">{{amount}}</span></p>
+                <P>GST</P>
+                <p class="ms-auto"> Rs.<span id="GST">{{GST}}</span></p>
+                <hr>
+                <p><strong> Total Amount </strong></p>
+                <p class="ms-auto">Rs.<strong id="total_amount">{{total_amount}}</strong></p>
+                <a href='/shop/checkout'>
+                    <button type="submit" class="btn btn-success remove-cart">Place Order
+                    </button>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
